@@ -1,0 +1,97 @@
+git 相关命令
+
+提交信息：
+git reflog 
+git log
+git status
+
+查看工作区和版本库里面最新版本的区别:
+git diff HEAD -- readme.txt
+git diff
+
+版本回退：
+HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
+穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
+要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
+1.回退到上一次commit
+git reset --hard HEAD^
+2.到某一次commit
+git reset --hard  36daa629d0fe85fb855c870d4e9fa00d172ce71a
+
+
+提交：
+放入暂存区
+git add .
+提交修改
+git commit -m 'xxxxxx'
+组合
+git commit -am 'xxxxxx'
+
+
+放弃修改：
+场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
+场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD <file>，就回到了场景1，第二步按场景1操作。
+场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。
+1.add之前 
+git checkout -- file
+2.add之后 commit之前
+git reset HEAD <file> 
+git checkout -- file
+
+分支：
+1.创建
+git branch dev
+2.切换
+git checkout dev
+3.创建并切换
+git checkout -b dev
+4.列出分支
+git branch
+git branch –r （列出远程分支 ，-a 所有分支 ）
+5.合并某分支到当前分支
+git merge <name>
+6.删除分支
+git branch -d dev
+git branch -D dev (强行删除)
+7.命令可以看到分支合并图
+git log --graph
+
+某个提交拿到当前版本来：
+git cherry-pick ec9bf700659b4c5ede9d74f2b7821ef8a3748e82
+
+暂存：
+1.暂存文件
+git stash
+2.恢复
+git stash pop
+
+git rebase
+rebase操作可以把本地未push的分叉提交历史整理成直线；
+rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。
+
+刷新远端分支列表
+git remote update origin --prune
+
+检出远程分支
+git checkout origin/<远程分支名称>
+
+拉取远端最新进度
+git fetch origin master
+
+组合命令
+1.假如缓存去且提交
+git commit -am 'xxxxxx'
+2.拉取并变基
+git pull --rebase origin master
+
+其他： 
+cat <file>
+rm <file>
+
+Wi-Fi：
+ND_TEST: kf82539817            
+xinjiejiaoyu： xj82539817       
+Testnds:82539817
+
+lb123456   class+.  mima
+
